@@ -46,11 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\IServices.cs" />
-    <Compile Include="Model\Jsonmodel.cs" />
     <Compile Include="BL\JsonServices.cs" />
     <Compile Include="GosDuma.cs" />
     <Compile Include="Model\Deputy.cs" />
-    <Compile Include="Model\Faction.cs" />
+    <Compile Include="Model\Shorthand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

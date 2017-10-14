@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GosDumaApiIntegration.Model;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,28 +29,28 @@ namespace GosDumaApiIntegration.BL
             _apiToken = apiToken;
             _appToken = appToken;
         }
-
-        public async Task<string> GetResponseFromApi(string request, IEnumerable<string> parametres)
-        {
+        
+        public async Task<T> GetResponseFromApi<T>(string request, IDictionary<string,string> parametres)
+        { 
             const string apiRootUri = "http://api.duma.gov.ru/api";
             const string format = "json";
             var parametresString = String.Empty;
+
             if (parametres!=null)
-            {
-                
+            {                
                 foreach(var parameter in parametres)
                 {
-                    if (String.IsNullOrEmpty(parameter)) continue;
+                    if (String.IsNullOrEmpty(parameter.Key)|| String.IsNullOrEmpty(parameter.Value)) continue;
 
-                    parametresString += $"&{parameter}";
+                    parametresString += $"&{parameter.Key}={parameter.Value}";
                 }
             }
 
             var responseString = $"{apiRootUri}/{_apiToken}/{request}.{format}?app_token={_appToken}{parametresString}";
 
             try
-            {
-                return await GetHttpResponseAsync(responseString);
+            {                 
+                return JsonConvert.DeserializeObject<T>(await GetHttpResponseAsync(responseString));
             }
             catch(Exception)
             {

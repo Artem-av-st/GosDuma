@@ -21,6 +21,15 @@ namespace GosDumaApiIntegration.Model
             IsCurrent = isCurrent;
         }
 
+        public class Faction
+        {
+            public string Id { get; set; }
+            public string Name { get; set; }
+            public string StartDate { get; set; }
+            public string EndDate { get; set; }
+
+        }
+
         public enum DeputyPosition
         {
             SfMember,

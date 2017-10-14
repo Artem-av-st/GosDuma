@@ -8,6 +8,6 @@ namespace GosDumaApiIntegration.BL
 {
     internal interface IServices
     {
-        Task<string> GetResponseFromApi(string request, IEnumerable<string> parametres);
+        Task<T> GetResponseFromApi<T>(string request, IDictionary<string, string> parametres);
     }
 }
